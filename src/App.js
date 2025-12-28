@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 
 function Square({ key }) {
   const [value, setValue] = useState(null);
@@ -23,16 +23,12 @@ function Row({ values }) {
 }
 
 export default function Board() {
-  const cells = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-  ];
+  const [cells, setCells] = useState(Array(9).fill(null));
   return (
     <>
-      {cells.map((cellRow) => {
-        return <Row values={cellRow} />;
-      })}
+      <Row values={cells.slice(0, 3)} />
+      <Row values={cells.slice(3, 6)} />
+      <Row values={cells.slice(6, 9)} />
     </>
   );
 }
